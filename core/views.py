@@ -6,6 +6,8 @@ from rest_framework import authentication
 
 from core.models import Post
 from core.serializers import PostSerializer
+from rest_framework.response import Response
+from rest_framework import status
 
 
 class PostViewSet(viewsets.ModelViewSet):
@@ -13,3 +15,7 @@ class PostViewSet(viewsets.ModelViewSet):
     serializer_class = PostSerializer
     permission_classes = [permissions.IsAuthenticated]
     authentication_classes = [authentication.SessionAuthentication]
+
+    def perform_create(self, serializer):
+        print("my perform_create")
+        serializer.save(author=self.request.user)
