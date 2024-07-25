@@ -19,3 +19,7 @@ class PostViewSet(viewsets.ModelViewSet):
     def perform_create(self, serializer):
         print("my perform_create")
         serializer.save(author=self.request.user)
+
+    def perform_update(self, serializer):
+        print("my perform_update")
+        serializer.save(author=self.request.user)
