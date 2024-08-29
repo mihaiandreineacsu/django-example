@@ -1,5 +1,6 @@
 from django.test import TestCase
 from rest_framework.test import APIClient
+from rest_framework import status
 from django.urls import reverse
 from django.contrib.auth.models import User
 
@@ -18,6 +19,18 @@ class PostsAPITest(TestCase):
     def setUp(self) -> None:
         self.client = APIClient()
 
+    def test_request_delete_post(self):
+        user = User.objects.create(username="Mihai", password="pypassword")
+        user2 = User.objects.create(username="Andrei", password="pypassword")
+
+        new_post = Post.objects.create(author=user, title="Post from user Mihai", description="Some Post to test.")
+        self.client.force_authenticate(user=user2)
+        response = self.client.delete(detail_url(new_post.id))
+        print(response.context)
+        deleted_post = Post.objects.filter(author=user.id).first()
+        self.assertNotEqual(deleted_post, None)
+        self.assertEqual(response.status_code, status.HTTP_403_FORBIDDEN)
+
     def test_request_on_get(self):
         user = User.objects.create(username="Mihai", password="pypassword")
         self.client.force_authenticate(user=user)
@@ -26,7 +39,7 @@ class PostsAPITest(TestCase):
 
         print(response.context)
 
-        self.assertEqual(response.status_code, 200)
+        self.assertEqual(response.status_code, status.HTTP_200_OK)
 
     def test_request_create_post_ok(self):
         user = User.objects.create(username="Mihai", password="pypassword")
@@ -39,7 +52,7 @@ class PostsAPITest(TestCase):
         print(f"response : {response.context}")
 
         self.assertEqual(response.json().get("author"), user.id)
-        self.assertEqual(response.status_code, 201)
+        self.assertEqual(response.status_code, status.HTTP_201_CREATED)
 
     def test_request_update_ok(self):
         user = User.objects.create(username="Mihai", password="pypassword")
@@ -59,4 +72,4 @@ class PostsAPITest(TestCase):
         self.assertEqual(updated_post.author.id, user.id)
         self.assertEqual(updated_post.title, "Update Title")
         self.assertEqual(updated_post.description, "Update Description")
-        self.assertEqual(response.status_code, 200)
+        self.assertEqual(response.status_code, status.HTTP_200_OK)
