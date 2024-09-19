@@ -21,6 +21,12 @@ class PostViewSet(viewsets.ModelViewSet):
         instance.delete()
         return Response(status=status.HTTP_204_NO_CONTENT)
 
+    def update(self, request, *args, **kwargs):
+        instance = self.get_object()
+        if instance.author != self.request.user.id:
+            return Response(status=status.HTTP_403_FORBIDDEN)
+        return super.update(self, request, *args, **kwargs)
+
     def perform_create(self, serializer):
         print("my perform_create")
         serializer.save(author=self.request.user)
