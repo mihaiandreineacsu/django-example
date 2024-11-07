@@ -9,7 +9,7 @@ from rest_framework.routers import DefaultRouter
 from core import views
 
 router = DefaultRouter()
-router.register('tasks', views.PostViewSet)
+router.register('posts', views.PostViewSet)
 
 app_name = 'core'
 

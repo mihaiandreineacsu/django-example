@@ -6,26 +6,15 @@ from core.models import Post
 from core.serializers import PostSerializer
 from rest_framework.response import Response
 from rest_framework import status
+from .permissions import IsAuthorRequestUser
 
 
 class PostViewSet(viewsets.ModelViewSet):
     queryset = Post.objects.all()
     serializer_class = PostSerializer
-    permission_classes = [permissions.IsAuthenticated]
+    # TODO make browsable api work with permission class
+    # permission_classes = [IsAuthorRequestUser]
     authentication_classes = [authentication.SessionAuthentication]
-
-    def destroy(self, request, *args, **kwargs):
-        instance = self.get_object()
-        if instance.author != self.request.user.id:
-            return Response(status=status.HTTP_403_FORBIDDEN)
-        instance.delete()
-        return Response(status=status.HTTP_204_NO_CONTENT)
-
-    def update(self, request, *args, **kwargs):
-        instance = self.get_object()
-        if instance.author != self.request.user.id:
-            return Response(status=status.HTTP_403_FORBIDDEN)
-        return super.update(self, request, *args, **kwargs)
 
     def perform_create(self, serializer):
         print("my perform_create")

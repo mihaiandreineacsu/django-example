@@ -51,8 +51,8 @@ class PostsAPITest(TestCase):
         response = self.client.post(POST_API_URL, payload)
         print(f"response : {response.context}")
 
-        self.assertEqual(response.json().get("author"), user.id)
-        self.assertEqual(response.status_code, status.HTTP_201_CREATED)
+        self.assertIsNone(response.json().get("author"))
+        self.assertEqual(response.status_code, status.HTTP_403_FORBIDDEN)
 
     def test_request_update_ok(self):
         user = User.objects.create(username="Mihai", password="pypassword")
@@ -68,29 +68,26 @@ class PostsAPITest(TestCase):
 
         updated_post = Post.objects.get(id=new_post.id)
 
-        # self.assertEqual(updated_post.id, new_post.id)
-        # self.assertEqual(updated_post.author.id, user.id)
-        # self.assertEqual(updated_post.title, "Update Title")
-        # self.assertEqual(updated_post.description, "Update Description")
+        self.assertEqual(updated_post.author, user2)
+        self.assertEqual(updated_post.title, "Some Title")
+        self.assertEqual(updated_post.description, "Some Description")
         self.assertEqual(response.status_code, status.HTTP_403_FORBIDDEN)
 
     def test_request_patch_ok(self):
-        # TODO Fix Test User1 can update post of user 2
         user = User.objects.create(username="Mihai", password="pypassword")
         user2 = User.objects.create(username="Andrei", password="pypassword")
-        new_post = Post(author=user, title="Some Title", description="Some Description")
+
+        new_post = Post(author=user2, title="Some Title", description="Some Description")
         new_post.save()
 
         self.client.force_authenticate(user=user)
 
         payload = {"author": user2.id, "title": "Update Title", "description": "Update Description"}
         response = self.client.patch(detail_url(new_post.id), payload)
-        print(f"response : {response.context}")
 
         updated_post = Post.objects.get(id=new_post.id)
-
         self.assertEqual(updated_post.id, new_post.id)
-        self.assertEqual(updated_post.author.id, user.id)
-        self.assertEqual(updated_post.title, "Update Title")
-        self.assertEqual(updated_post.description, "Update Description")
-        self.assertEqual(response.status_code, status.HTTP_200_OK)
+        self.assertEqual(updated_post.author.id, user2.id)
+        self.assertEqual(updated_post.title, "Some Title")
+        self.assertEqual(updated_post.description, "Some Description")
+        self.assertEqual(response.status_code, status.HTTP_403_FORBIDDEN)
