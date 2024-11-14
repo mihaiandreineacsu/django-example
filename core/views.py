@@ -12,8 +12,7 @@ from .permissions import IsAuthorRequestUser
 class PostViewSet(viewsets.ModelViewSet):
     queryset = Post.objects.all()
     serializer_class = PostSerializer
-    # TODO make browsable api work with permission class
-    # permission_classes = [IsAuthorRequestUser]
+    permission_classes = [IsAuthorRequestUser]
     authentication_classes = [authentication.SessionAuthentication]
 
     def perform_create(self, serializer):
