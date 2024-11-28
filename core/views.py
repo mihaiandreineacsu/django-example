@@ -13,7 +13,7 @@ class PostViewSet(viewsets.ModelViewSet):
     queryset = Post.objects.all()
     serializer_class = PostSerializer
     permission_classes = [IsAuthorRequestUser]
-    authentication_classes = [authentication.SessionAuthentication]
+    # authentication_classes = [authentication.BasicAuthentication]
 
     def perform_create(self, serializer):
         print("my perform_create")
