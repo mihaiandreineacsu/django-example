@@ -6,11 +6,12 @@ from django.contrib.auth.models import User
 
 from core.models import Post
 
-POST_API_URL = reverse('core:post-list')
+POST_API_URL = reverse("core:post-list")
+
 
 def detail_url(post_id):
     """Create and return a post detail URL."""
-    return reverse('core:post-detail', args=[post_id])
+    return reverse("core:post-detail", args=[post_id])
 
 
 # Create your tests here.
@@ -59,7 +60,11 @@ class PostsAPITest(TestCase):
 
         self.client.force_authenticate(user=user)
 
-        payload = {"author": user.id, "title": "Some Title", "description": "Some Description"}
+        payload = {
+            "author": user.id,
+            "title": "Some Title",
+            "description": "Some Description",
+        }
         response = self.client.post(POST_API_URL, payload)
         print(f"response : {response.context}")
 
@@ -74,7 +79,11 @@ class PostsAPITest(TestCase):
 
         self.client.force_authenticate(user=user)
 
-        payload = {"author": user2.id, "title": "Update Title", "description": "Update Description"}
+        payload = {
+            "author": user2.id,
+            "title": "Update Title",
+            "description": "Update Description",
+        }
         response = self.client.put(detail_url(new_post.id), payload)
         print(f"response : {response.context}")
 
@@ -92,7 +101,11 @@ class PostsAPITest(TestCase):
 
         self.client.force_authenticate(user=user)
 
-        payload = {"author": user.id, "title": "Update Title", "description": "Update Description"}
+        payload = {
+            "author": user.id,
+            "title": "Update Title",
+            "description": "Update Description",
+        }
         response = self.client.put(detail_url(new_post.id), payload)
         print(f"response : {response.context}")
 
@@ -112,7 +125,11 @@ class PostsAPITest(TestCase):
 
         self.client.force_authenticate(user=user)
 
-        payload = {"author": user2.id, "title": "Update Title", "description": "Update Description"}
+        payload = {
+            "author": user2.id,
+            "title": "Update Title",
+            "description": "Update Description",
+        }
         response = self.client.patch(detail_url(new_post.id), payload)
 
         updated_post = Post.objects.get(id=new_post.id)

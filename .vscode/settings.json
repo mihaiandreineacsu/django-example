@@ -1,0 +1,7 @@
+{
+    "black-formatter.args": [
+        "--config", "black.ini"  // Pointing to your black.ini configuration
+    ],
+    "editor.formatOnSave": true,  // Format on save
+    "editor.tabSize": 4,  // 4 spaces for tabs
+}
