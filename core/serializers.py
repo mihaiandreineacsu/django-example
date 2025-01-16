@@ -6,4 +6,7 @@ class PostSerializer(serializers.ModelSerializer):
 
     class Meta:
         model = Post
-        exclude = ("id", "author")
+        exclude = ("id",)
+        read_only_fields = [
+            "author",
+        ]

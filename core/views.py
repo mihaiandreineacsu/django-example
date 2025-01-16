@@ -6,6 +6,10 @@ from .permissions import IsAuthorRequestUser
 
 
 class PostViewSet(viewsets.ModelViewSet):
+    """
+    CRUD View Set for DABooks Posts
+    """
+
     queryset = Post.objects.all()
     serializer_class = PostSerializer
     permission_classes = [IsAuthorRequestUser]
