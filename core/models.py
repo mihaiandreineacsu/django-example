@@ -15,3 +15,14 @@ class Post(models.Model):
         max_length=250, null=False, blank=False, help_text="Post title given by author when creating it."
     )
     description = models.CharField(max_length=1000, null=False, blank=True, default="")
+
+
+# TODO Create Categories for Posts -> ManyToMany
+# Fields Constrains
+# Sub Categories -> Example: Main Category "News" then Sb Categories like : "Sport", "Politic" etc...
+# Fields:
+#   - Name:
+#   - Color: Django Color Package?
+#   - Description
+#   - Parent Category: Model Category (How to resolve Infinite Loop?)
+#
