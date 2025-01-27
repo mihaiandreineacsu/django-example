@@ -1,3 +1,3 @@
 # Django Demo Live-Call
 
-TBD
+This project is a demo used in Backend Live-Calls to exercise Django and other Backend matters.
