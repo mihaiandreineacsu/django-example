@@ -22,3 +22,5 @@ This command does the following:
 5. ```xargs git branch -D```: Deletes the local branches that were identified in the previous step.
 
 You can run this command manually whenever you want to clean up your local branches. Alternatively, you can set up a cron job or a scheduled task to run this command automatically at regular intervals.
+
+Merge Conflict feature branch
