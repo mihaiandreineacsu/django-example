@@ -24,8 +24,8 @@ jobs:
         run: |
           # Try to merge the target branch into the PR branch
           if ! git merge --no-commit --no-ff origin/${{ github.event.pull_request.base.ref }}; then
-            echo "Error: This pull request has merge conflicts with the target branch."
+            echo "❌ Error: This pull request has merge conflicts with the target branch."
             exit 1
           else
-            echo "No merge conflicts detected."
+            echo "✅ No merge conflicts detected."
           fi
