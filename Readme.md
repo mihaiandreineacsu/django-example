@@ -1,5 +1,7 @@
 # Django Demo Live-Call
 
+This project is a demo used in Backend Live-Calls to exercise Django and other Backend matters.
+
 ## Command to Fetch remote Branches
 
 ```bash
@@ -23,4 +25,5 @@ This command does the following:
 
 You can run this command manually whenever you want to clean up your local branches. Alternatively, you can set up a cron job or a scheduled task to run this command automatically at regular intervals.
 
+Merge conflict Staging change.
 Merge Conflict feature branch
