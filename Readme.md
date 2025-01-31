@@ -27,3 +27,5 @@ You can run this command manually whenever you want to clean up your local branc
 
 Merge conflict Staging change.
 Merge Conflict feature branch
+
+Change in readme-update.
