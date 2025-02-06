@@ -1,0 +1,6 @@
+env/
+.vscode/
+black.ini
+flake8.ini
+requirements.dev.txt
+.env
