@@ -40,6 +40,7 @@ INSTALLED_APPS = [
     "rest_framework",
     "core",
     "drf_yasg",
+    "colorfield",
 ]
 
 MIDDLEWARE = [
