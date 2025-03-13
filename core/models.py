@@ -19,19 +19,10 @@ class Category(models.Model):
     The Core Model for Categories
     """
 
-    COLOR_PALETTE = [
-        (
-            "#FFFFFF",
-            "white",
-        ),
-        (
-            "#000000",
-            "black",
-        ),
-    ]
-
-    name = models.CharField(max_length=80, null=False, blank=False, unique=True, help_text="The name of Post category.")
-    color = ColorField(choices=COLOR_PALETTE)
+    name = models.CharField(
+        max_length=80, null=False, blank=False, unique=True, help_text="The unique name of Post category."
+    )
+    color = ColorField(null=False, blank=False, unique=True, help_text="The unique color of category.")
 
     class Meta:
         verbose_name_plural = "Categories"
@@ -40,7 +31,12 @@ class Category(models.Model):
                 Lower("name"),
                 name="unique_lower_name",
                 violation_error_message="This Name already exists (Capital- and Lowercase is ignored).",
-            )
+            ),
+            models.UniqueConstraint(
+                Lower("color"),
+                name="unique_lower_color",
+                violation_error_message="This color already exists (Capital- and Lowercase is ignored).",
+            ),
         ]
 
     def delete(self, *args, **kwargs):
