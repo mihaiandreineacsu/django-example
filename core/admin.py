@@ -1,18 +1,17 @@
 from django.contrib import admin
-from core.models import Category, Post
+from core.models import Category, Post, PostCategory
 from django.utils.safestring import mark_safe
 
 
-class PostInline(admin.StackedInline):  # Or admin.TabularInline for a table layout
-    model = Post
-    extra = 1  # Number of empty forms to display
+class CategoryInline(admin.TabularInline):  # Or admin.TabularInline for a table layout
+    model = PostCategory
+    extra = 0  # Number of empty forms to display
 
 
 @admin.register(Category)
 class CategoryAdmin(admin.ModelAdmin):
     list_display = ("name", "color_display")
     search_fields = ("name",)
-    inlines = [PostInline]  # Show Post entries inside the Category admin page
 
     def color_display(self, obj: Category):
         return mark_safe(
@@ -24,9 +23,11 @@ class CategoryAdmin(admin.ModelAdmin):
 
 @admin.register(Post)
 class PostAdmin(admin.ModelAdmin):
-    list_display = ("author", "title", "category")
+    list_display = ("author", "title")
     search_fields = (
         "title",
         "description",
     )
-    list_filter = ("author", "category")
+    list_filter = ("author",)
+    inlines = [CategoryInline]  # Show Post entries inside the Category admin page
+    exclude = ["categories"]

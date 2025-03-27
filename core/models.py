@@ -6,10 +6,10 @@ from colorfield.fields import ColorField
 
 def get_or_create_uncategorized():
     """
-    Get the 'Uncategorized' category, or create it if it doesn't exist.
+    Get the 'Uncategorised' category, or create it if it doesn't exist.
     """
     category, created = Category.objects.get_or_create(
-        name="Uncategorized", defaults={"color": "#000000"}  # Set a default color if creating a new category
+        name="Uncategorised", defaults={"color": "#000000"}  # Set a default color if creating a new category
     )
     return category
 
@@ -45,7 +45,7 @@ class Category(models.Model):
             when deleting other Categories.
         """
         if self.name.lower() == "uncategorized":
-            raise ValueError("The 'Uncategorized' category cannot be deleted.")
+            raise ValueError("The 'Uncategorised' category cannot be deleted.")
         super().delete(*args, **kwargs)
 
     def __str__(self):
@@ -67,13 +67,14 @@ class Post(models.Model):
     description = models.TextField(
         max_length=1000, null=False, blank=True, default="", help_text="A description what this post is about."
     )
-    category = models.ForeignKey(
-        to=Category,
-        on_delete=models.SET(get_or_create_uncategorized),
-        null=False,
-        blank=False,
-        help_text="Category that matches the Post content.",
-    )
+
+    categories = models.ManyToManyField(to=Category, through="core.PostCategory")
+
+
+class PostCategory(models.Model):
+    post = models.ForeignKey(Post, on_delete=models.CASCADE)
+    category = models.ForeignKey(Category, on_delete=models.CASCADE)
+    date_created = models.DateField(auto_created=True)
 
 
 # TODO Create Categories for Posts -> ManyToMany
