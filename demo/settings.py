@@ -41,6 +41,8 @@ INSTALLED_APPS = [
     "core",
     "drf_yasg",
     "colorfield",
+    "graphene_django",
+    "graphene_view",
 ]
 
 MIDDLEWARE = [
@@ -139,3 +141,5 @@ SWAGGER_SETTINGS = {
     "LOGIN_URL": "/admin/login/",
     "LOGOUT_URL": "/admin/logout/",
 }
+
+GRAPHENE = {"SCHEMA": "graphene_view.schema.schema"}

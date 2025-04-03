@@ -68,7 +68,7 @@ class Post(models.Model):
         max_length=1000, null=False, blank=True, default="", help_text="A description what this post is about."
     )
 
-    categories = models.ManyToManyField(to=Category, through="core.PostCategory")
+    categories = models.ManyToManyField(to=Category, through="core.PostCategory", related_name="posts")
 
 
 class PostCategory(models.Model):
