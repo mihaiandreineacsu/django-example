@@ -1,6 +1,10 @@
+wheel==0.45.1
 Django==5.2
 djangorestframework==3.16.0
 sqlparse==0.5.3
 drf-yasg==1.21.10
 django-colorfield==0.13.0
 graphene-django==3.2.3
+python-dotenv==1.1.0
+flake8==7.1.1
+black==24.10.0
