@@ -1,6 +1,10 @@
-env/
+.git/
 .vscode/
+venv/
+
+.env
+.gitignore
+Dockerfile
 black.ini
 flake8.ini
-requirements.dev.txt
-.env
+*.MD
