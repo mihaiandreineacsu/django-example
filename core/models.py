@@ -78,6 +78,7 @@ class Post(models.Model):
 
     categories = models.ManyToManyField(to=Category, through="core.PostCategory", related_name="posts")
 
+
 class PostCategory(models.Model):
     post = models.ForeignKey(Post, on_delete=models.CASCADE)
     category = models.ForeignKey(Category, on_delete=models.CASCADE)
