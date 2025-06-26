@@ -147,4 +147,5 @@ SWAGGER_SETTINGS = {
     "LOGOUT_URL": "/admin/logout/",
 }
 
+
 GRAPHENE = {"SCHEMA": "graphene_view.schema.schema"}

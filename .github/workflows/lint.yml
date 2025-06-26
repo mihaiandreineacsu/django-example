@@ -10,10 +10,8 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Check out repository code
-        uses: actions/checkout@v4
+        uses: actions/checkout@v4.2.2
       - name: Install Requirements
         run: pip install -r requirements-dev.txt
       - name: Run Linting
         run: flake8 --config=flake8.ini ./
-      
-  
