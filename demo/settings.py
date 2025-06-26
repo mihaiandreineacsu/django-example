@@ -29,7 +29,7 @@ SECRET_KEY = os.getenv("SECRET_KEY")
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = os.getenv("DEBUG", default="False").strip().lower() == "true"
 
-ALLOWED_HOSTS = os.getenv("ALLOWED_HOSTS", default="localhost").split(",")
+ALLOWED_HOSTS = os.getenv("ALLOWED_HOSTS", default="localhost,127.0.0.1").split(",")
 
 # Application definition
 
@@ -125,6 +125,7 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/5.0/howto/static-files/
 
 STATIC_URL = "static/"
+MEDIA_URL = "media/"
 
 # Default primary key field type
 # https://docs.djangoproject.com/en/5.0/ref/settings/#default-auto-field
@@ -139,6 +140,7 @@ REST_FRAMEWORK = {
 }
 
 STATIC_ROOT = BASE_DIR / "statics"
+MEDIA_ROOT = BASE_DIR / "medias"
 
 SWAGGER_SETTINGS = {
     "LOGIN_URL": "/admin/login/",

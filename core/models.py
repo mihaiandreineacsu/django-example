@@ -2,6 +2,7 @@ from django.db import models
 from django.contrib.auth.models import User
 from django.db.models.functions import Lower
 from colorfield.fields import ColorField
+from demo import settings
 
 
 def get_or_create_uncategorized():
@@ -66,6 +67,13 @@ class Post(models.Model):
     )
     description = models.TextField(
         max_length=1000, null=False, blank=True, default="", help_text="A description what this post is about."
+    )
+
+    image = models.ImageField(
+        upload_to=f"{settings.MEDIA_ROOT}/posts",
+        null=True,
+        blank=True,
+        help_text="An image that represents the post.",
     )
 
     categories = models.ManyToManyField(to=Category, through="core.PostCategory", related_name="posts")
