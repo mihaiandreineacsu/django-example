@@ -1,0 +1,10 @@
+.git/
+.vscode/
+venv/
+
+.env
+.gitignore
+Dockerfile
+black.ini
+flake8.ini
+*.MD
