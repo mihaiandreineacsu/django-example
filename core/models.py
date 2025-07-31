@@ -38,7 +38,22 @@ class Category(models.Model):
                 name="unique_lower_color",
                 violation_error_message="This color already exists (Capital- and Lowercase is ignored).",
             ),
+            models.CheckConstraint(
+                check=(~models.Q(name="")), name="name_populated", violation_error_message="Name can not be empty!"
+            ),
+            models.CheckConstraint(
+                check=(~models.Q(color="")), name="color_populated", violation_error_message="Color can not be empty!"
+            ),
+            models.CheckConstraint(
+                check=~models.Q(parent_category=models.F("id")),
+                name="prevent_self_reference",
+                violation_error_message="Category cannot reference itself!",
+            ),
         ]
+
+    parent_category = models.ForeignKey(
+        "self", on_delete=models.CASCADE, related_name="subordinates", null=True, blank=True
+    )
 
     def delete(self, *args, **kwargs):
         """
