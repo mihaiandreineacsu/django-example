@@ -1,0 +1,21 @@
+{
+    "exclude": [
+        "**/migrations/**", // Exclude Django migration files
+        "**/__pycache__/**", // Exclude compiled Python files
+        "**/settings.py", // Optionally exclude settings files if they cause issues
+        "**/manage.py", // Exclude manage.py if it causes issues
+        "**/wsgi.py", // Exclude wsgi.py if it causes issues
+        "**/asgi.py", // Exclude asgi.py if it causes issues
+        "**/venv/**"
+    ],
+    // "reportAttributeAccessIssue": "none",
+    // "reportMissingImports": false, // Ignore missing imports, which can be common in Django projects
+    // "reportMissingParameterType": "warning", // Warn about missing parameter types
+    // "reportMissingReturnType": "warning", // Warn about missing return types
+    // "reportMissingTypeStubs": false, // Ignore missing type stubs
+    // "reportUnknownArgumentType": "none", // Warn about unknown argument types
+    // "reportUnknownMemberType": "none", // Warn about unknown member types
+    // "reportUnknownParameterType": "warning", // Warn about unknown parameter types
+    // "reportUnknownVariableType": "none", // Warn about unknown variable types
+    "typeCheckingMode": "strict" // Use "basic" for a balanced approach, or "strict" for more thorough checks
+}

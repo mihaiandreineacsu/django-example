@@ -3,13 +3,19 @@
         "--config",
         "black.ini" // Pointing to your black.ini configuration
     ],
+    "cSpell.words": [ // code spell check extention
+        "dotenv"
+    ],
+    "editor.formatOnSave": true, // Format on save
+    "editor.tabSize": 4, // 4 spaces for tabs
     "flake8.args": [
         "--config",
         "flake8.ini"
     ],
-    "editor.formatOnSave": true, // Format on save
-    "editor.tabSize": 4, // 4 spaces for tabs
-    "cSpell.words": [ // code spell check extention
-        "dotenv"
-    ],
+    "python.analysis.inlayHints.callArgumentNames": "all",
+    "python.analysis.inlayHints.functionReturnTypes": true,
+    // "python.analysis.diagnosticMode": "openFilesOnly",
+    // "python.analysis.typeCheckingMode": "strict"
+    "python.analysis.inlayHints.variableTypes": true,
+    "python.languageServer": "Pylance"
 }

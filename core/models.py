@@ -1,15 +1,22 @@
-from django.db import models
-from django.contrib.auth.models import User
-from django.db.models.functions import Lower
+from typing import Any
+
 from colorfield.fields import ColorField
-from demo import settings
+from django.contrib.auth.models import User
+from django.db import models
+from django.db.models.functions import Lower
+from typing_extensions import override
+
+
+def post_directory_path(instance: "Post", filename: str) -> str:
+    # file will be uploaded to MEDIA_ROOT/post_<id>/<filename>
+    return "post_{0}/{1}".format(instance.id, filename)
 
 
 def get_or_create_uncategorized():
     """
     Get the 'Uncategorised' category, or create it if it doesn't exist.
     """
-    category, created = Category.objects.get_or_create(
+    category, _ = Category.objects.get_or_create(
         name="Uncategorised", defaults={"color": "#000000"}  # Set a default color if creating a new category
     )
     return category
@@ -39,13 +46,15 @@ class Category(models.Model):
                 violation_error_message="This color already exists (Capital- and Lowercase is ignored).",
             ),
             models.CheckConstraint(
-                check=(~models.Q(name="")), name="name_populated", violation_error_message="Name can not be empty!"
+                condition=(~models.Q(name="")), name="name_populated", violation_error_message="Name can not be empty!"
             ),
             models.CheckConstraint(
-                check=(~models.Q(color="")), name="color_populated", violation_error_message="Color can not be empty!"
+                condition=(~models.Q(color="")),
+                name="color_populated",
+                violation_error_message="Color can not be empty!",
             ),
             models.CheckConstraint(
-                check=~models.Q(parent_category=models.F("id")),
+                condition=~models.Q(parent_category=models.F("id")),
                 name="prevent_self_reference",
                 violation_error_message="Category cannot reference itself!",
             ),
@@ -55,20 +64,20 @@ class Category(models.Model):
         "self", on_delete=models.CASCADE, related_name="subordinates", null=True, blank=True
     )
 
-    def delete(self, *args, **kwargs):
+    @override
+    def delete(self, *args: bool, **kwargs: dict[str, Any]) -> tuple[int, dict[str, int]]:
         """
         Protect the uncategorized Category because is used as Fallback to be set on Posts ForeignKey
             when deleting other Categories.
         """
         if self.name.lower() == "uncategorized":
             raise ValueError("The 'Uncategorised' category cannot be deleted.")
-        super().delete(*args, **kwargs)
+        return super().delete(*args, **kwargs)
 
     def __str__(self):
         return self.name
 
 
-# Create your models here.
 class Post(models.Model):
     """
     The Core Model for DABooks Posts
@@ -85,7 +94,7 @@ class Post(models.Model):
     )
 
     image = models.ImageField(
-        upload_to=f"{settings.MEDIA_ROOT}/posts",
+        upload_to=post_directory_path,  # MEDIA_ROOT / posts
         null=True,
         blank=True,
         help_text="An image that represents the post.",
@@ -98,16 +107,3 @@ class PostCategory(models.Model):
     post = models.ForeignKey(Post, on_delete=models.CASCADE)
     category = models.ForeignKey(Category, on_delete=models.CASCADE)
     date_created = models.DateField(auto_created=True)
-
-
-# TODO Create Categories for Posts -> ManyToMany
-# Fields Constrains
-# Sub Categories -> Example: Main Category "News" then Sb Categories like : "Sport", "Politic" etc...
-# Fields:
-#   - Name: unique constrain Ex. Sport == sport :checked:
-#   - Color: Django Color Package?
-#   - Description
-#   - Parent Category: Model Category (How to resolve Infinite Loop?)
-#
-# Test Feature 1 Bug fix
-# Test Feature 2
