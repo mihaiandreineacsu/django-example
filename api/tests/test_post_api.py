@@ -17,6 +17,8 @@ def detail_url(post_id):
 # Create your tests here.
 class PostsAPITest(TestCase):
 
+    client: APIClient
+
     def setUp(self) -> None:
         self.client = APIClient()
 

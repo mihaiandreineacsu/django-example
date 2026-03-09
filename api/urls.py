@@ -2,17 +2,15 @@
 URL mappings for the core app.
 """
 
-from django.urls import (
-    path,
-    include,
-)
+from django.urls import include, path
 from rest_framework.routers import DefaultRouter
-from core import views
+
+from api import views
 
 router = DefaultRouter()
 router.register("posts", views.PostViewSet)
 
-app_name = "core"
+app_name = "api"
 
 urlpatterns = [
     path("", include(router.urls)),
