@@ -16,4 +16,4 @@ jobs:
       - name: Run Linting
         run: flake8 --config=flake8.ini ./
       - name: Run Formatter Check
-        run: black --config=black.ini .
+        run: black --config=black.ini --check .
