@@ -7,18 +7,15 @@ from django.forms import TextInput
 
 class ColorWidget(TextInput):
     template_name = ...
+
     class Media:
         if settings.DEBUG:
             js = ...
         else:
             js = ...
-    
-    
-    def get_context(self, name, value, attrs=...): # -> dict[Any, Any]:
-        ...
-    
-    def render(self, name, value, attrs=..., renderer=...): # -> SafeString:
-        ...
-    
 
+    def get_context(self, name, value, attrs=...):  # -> dict[Any, Any]:
+        ...
 
+    def render(self, name, value, attrs=..., renderer=...):  # -> SafeString:
+        ...
