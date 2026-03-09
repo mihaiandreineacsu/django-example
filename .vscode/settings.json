@@ -6,6 +6,7 @@
     "cSpell.words": [ // code spell check extention
         "dotenv"
     ],
+    "editor.defaultFormatter": "ms-python.black-formatter",
     "editor.formatOnSave": true, // Format on save
     "editor.tabSize": 4, // 4 spaces for tabs
     "flake8.args": [
