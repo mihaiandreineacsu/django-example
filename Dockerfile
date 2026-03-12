@@ -1,4 +1,4 @@
-FROM python:3.13.3-alpine
+FROM python:3.13.3-alpine3.22
 
 # Set environment variables
 # Prevents Python from writing .pyc files.
@@ -16,4 +16,4 @@ EXPOSE 8000
 
 # Dockerfile CMD doesn't understand ENV variables
 # See Issue: https://github.com/moby/moby/issues/5509
-CMD ["sh", "-c", "python manage.py makemigrations ; python manage.py migrate ; exec python manage.py runserver 0.0.0.0:8000"]
+CMD ["sh", "-c", "python manage.py migrate ; exec python manage.py runserver 0.0.0.0:8000"]
