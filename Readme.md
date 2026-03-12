@@ -22,10 +22,10 @@ git clone https://github.com/mihaiandreineacsu/django-example.git
 # Navigate to project
 cd django-example
 
-# Create a .env file from template.env file
-cp template.env .env  # for bash (Linux/MacOS)
-Copy-Item -Path template.env -Destination .env  # for powershell (Windows)
-# Replace the default values from template.env in .env with your own
+# Create a .env file from example.env file
+cp example.env .env  # for bash (Linux/MacOS)
+Copy-Item -Path example.env -Destination .env  # for powershell (Windows)
+# Replace the default values from example.env in .env with your own
 ```
 
 ### Starting the project on your local machine
@@ -55,23 +55,23 @@ python manage.py runserver
 
 ```bash
 # Build Docker Image
-docker build -t django_example .
+docker build -t da-book:latest .
 
 # Start the container in bash (Linux/MacOS)
 docker run -it --rm \
-    --name django_example \
+    --name da-book \
     --env-file .env \
     -p 8000:8000 \
     -v $(pwd):/app \
-    django_example
+    da-book:latest
 
 # Start the container in powershell (Windows)
 docker run -it --rm `
-    --name django_example `
+    --name da-book `
     --env-file .env `
     -p 8000:8000 `
     -v ${PWD}:/app `
-    django_example
+    da-book:latest
 ```
 
 Open the application on [localhost:8000](http://localhost:8000)
