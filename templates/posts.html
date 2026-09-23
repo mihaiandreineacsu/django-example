@@ -1,0 +1,15 @@
+<p>Posts works!</p>
+
+{% for post in object_list %}
+
+<p>{{ post.title }}</p>
+
+{% endfor %}
+
+
+{% partialdef comments %}
+    {# Reusable content. #}
+    <p>Comments works!</p>
+{% endpartialdef comments %}
+
+{% partial comments %}
