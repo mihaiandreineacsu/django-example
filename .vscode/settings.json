@@ -3,7 +3,7 @@
         "--config",
         "black.ini" // Pointing to your black.ini configuration
     ],
-    "cSpell.language": "en,de-DE",
+    "cSpell.language": "en",
     "cSpell.words": [ // code spell check extention
         "dotenv"
     ],
