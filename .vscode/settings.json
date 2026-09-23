@@ -3,6 +3,7 @@
         "--config",
         "black.ini" // Pointing to your black.ini configuration
     ],
+    "cSpell.language": "en,de-DE",
     "cSpell.words": [ // code spell check extention
         "dotenv"
     ],
@@ -18,5 +19,8 @@
     // "python.analysis.diagnosticMode": "openFilesOnly",
     // "python.analysis.typeCheckingMode": "strict"
     "python.analysis.inlayHints.variableTypes": true,
-    "python.languageServer": "Pylance"
+    "python.languageServer": "Pylance"{
+        "python.analysis.stubPath": "./typings",
+        "python.analysis.typeCheckingMode": "strict"
+    }
 }
