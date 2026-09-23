@@ -1,8 +1,8 @@
-wheel==0.45.1
-Django==5.2
-djangorestframework==3.16.0
-sqlparse==0.5.3
-drf-yasg==1.21.10
-django-colorfield==0.13.0
+wheel==0.48.0
+Django==6.1.1
+djangorestframework==3.18.1
+sqlparse==0.6.0
+drf-yasg==1.21.15
+django-colorfield==0.14.0
 graphene-django==3.2.3
-python-dotenv==1.1.0
+python-dotenv==1.2.3
