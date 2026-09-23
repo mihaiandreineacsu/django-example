@@ -1,10 +1,17 @@
 FROM python:3.13.3-alpine3.22
 
+
+ARG OUR_ARG=test_value
+
+RUN echo "The value of OUR_ARG is: $OUR_ARG"
+
 # Set environment variables
 # Prevents Python from writing .pyc files.
 ENV PYTHONDONTWRITEBYTECODE=1
 # Ensures that Python output is sent straight to the terminal without buffering.
 ENV PYTHONUNBUFFERED=1
+
+ENV OUR_ENV=${OUR_ARG:-test_value}
 
 WORKDIR /app
 

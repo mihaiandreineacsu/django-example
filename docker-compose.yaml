@@ -1,0 +1,36 @@
+services:
+  web:
+    build:
+      args:
+        - OUR_ARG=production_value
+      dockerfile: ./da-book.Dockerfile
+      context: .
+    container_name: da-books
+    image: da-books:compose
+    environment:
+      - OUR_ENV=container_production_value
+    ports:
+      - 8888:8000
+    volumes:
+      - media:/app/medias
+      - static:/app/statics
+    # networks:
+    #   - db_backend
+
+#   db:
+#     image: postgres:latest
+#     container_name: postgres_container
+#     environment:
+#       POSTGRES_USER: django-example-user
+#       POSTGRES_PASSWORD: password
+#       POSTGRES_DB: django-example
+#       POSTGRES_PORT: 4444
+#     networks:
+#       - db_backend
+
+# networks:
+#   - db_backend:
+
+volumes:
+  media:
+  static:
