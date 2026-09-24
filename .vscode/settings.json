@@ -20,6 +20,7 @@
     // "python.analysis.typeCheckingMode": "strict"
     "python.analysis.inlayHints.variableTypes": true,
     "python.languageServer": "Pylance"{
+        "python.analysis.extraPaths": "src",
         "python.analysis.stubPath": "./typings",
         "python.analysis.typeCheckingMode": "strict"
     }

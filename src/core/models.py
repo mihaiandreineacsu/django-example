@@ -1,10 +1,11 @@
 from typing import Any
 
-from colorfield.fields import ColorField
 from django.contrib.auth.models import User
 from django.db import models
 from django.db.models.functions import Lower
 from typing_extensions import override
+
+from colorfield.fields import ColorField
 
 
 def post_directory_path(instance: "Post", filename: str) -> str:

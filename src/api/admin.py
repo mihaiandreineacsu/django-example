@@ -1,6 +1,7 @@
 from django.contrib import admin
-from core.models import Category, Post, PostCategory
 from django.utils.safestring import mark_safe
+
+from core.models import Category, Post, PostCategory
 
 
 class CategoryInline(admin.TabularInline):  # Or admin.TabularInline for a table layout

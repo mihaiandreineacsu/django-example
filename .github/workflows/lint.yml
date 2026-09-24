@@ -10,10 +10,10 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Check out repository code
-        uses: actions/checkout@v4.2.2
+        uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
       - name: Install Requirements
         run: pip install -r requirements-dev.txt
       - name: Run Linting
-        run: flake8 --config=flake8.ini ./
+        run: flake8 --config=flake8.ini ./src
       - name: Run Formatter Check
-        run: black --config=black.ini --check .
+        run: black --config=black.ini --check ./src
